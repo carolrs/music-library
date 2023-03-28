@@ -16,11 +16,13 @@ RSpec.describe AlbumRepository do
     repo = AlbumRepository.new
     albums = repo.all
     
+    expected_result = Album.new("1", 'Patience', '1988', "1")
+
     expect(albums.length).to eq (2) # => 2
 
-    expect(albums.first.title).to eq ('Patience') # => 'Patience'
-    expect(albums.first.release_year).to eq ('1988') # => '1988'
-    expect(albums.first.artist_id).to eq ('1') #=> 1
+    expect(albums.first).to eq (expected_result) # => 'Patience'
+    # expect(albums.first.release_year).to eq ('1988') # => '1988'
+    # expect(albums.first.artist_id).to eq ('1') #=> 1
 
   end
 

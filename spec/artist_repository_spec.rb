@@ -12,13 +12,13 @@ RSpec.describe ArtistRepository do
     reset_albums_table
   end
 
-  it 'returns two albums' do
+  it 'return artist' do
     repo = ArtistRepository.new
     artists = repo.all
     
   
-    expect(artists.first.name).to eq ('Guns n Roses') # => 'Patience'
-    expect(artists.first.genre).to eq ('Rock') # => '1988'
+    expect(artists.first.name).to eq ('Guns n Roses')
+    expect(artists.first.genre).to eq ('Rock')
    
 
   end

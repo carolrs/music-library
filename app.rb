@@ -14,6 +14,6 @@ album_repository.all.each do |album|
   p album
 end
 
-artist_repository.all.each do |album|
-  p album
+artist.all.each do |album|
+  p album 
 end
