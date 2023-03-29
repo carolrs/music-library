@@ -20,10 +20,14 @@ RSpec.describe AlbumRepository do
 
     expect(albums.length).to eq (2) # => 2
 
-    expect(albums.first).to eq (expected_result) # => 'Patience'
-    # expect(albums.first.release_year).to eq ('1988') # => '1988'
-    # expect(albums.first.artist_id).to eq ('1') #=> 1
+    expect(albums.first).to eq (expected_result)
 
-  end
+    end
 
+    it 'returns one album by id' do
+      repo = AlbumRepository.new
+      albums = repo.find(1)
+
+      expect(albums.title).to eq "Patience"
+    end
 end

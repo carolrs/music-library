@@ -12,5 +12,8 @@ class Album
     return false unless other.is_a?(Album)
     @id == other.id && @title == other.title && @release_year == other.release_year && @artist_id == other.artist_id
   end
+  def to_s
+    return "Album : #{title}, Release_year: #{release_year}"
+  end
 
 end

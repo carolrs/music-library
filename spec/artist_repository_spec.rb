@@ -1,4 +1,4 @@
-require_relative 'lib/artist_repository'
+require 'artist_repository'
 
 RSpec.describe ArtistRepository do
 
@@ -19,8 +19,6 @@ RSpec.describe ArtistRepository do
   
     expect(artists.first.name).to eq ('Guns n Roses')
     expect(artists.first.genre).to eq ('Rock')
-   
-
   end
 
 end

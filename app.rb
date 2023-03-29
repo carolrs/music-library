@@ -9,11 +9,15 @@ DatabaseConnection.connect('music_library')
 album_repository = AlbumRepository.new
 artist = ArtistRepository.new
 
+p album_repository.find(1).title
+p album_repository.find(1).release_year
+
+puts "----------------------"
 # Print out each record from the result set .
 album_repository.all.each do |album|
-  p album
+  p "#{album.title}, #{album.release_year}"
 end
 
-artist.all.each do |album|
-  p album 
-end
+# artist.all.each do |album|
+#   p album 
+# end
