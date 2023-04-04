@@ -1,0 +1,18 @@
+@startuml
+
+participant "Client" as c #B9E9FC
+participant "Rackup" as r #B9E9FC
+participant "Repository class" as repo #B9E9FC
+participant "DataBase music_library" as ml #B9E9FC
+
+c-[#red]>r:"<b>Http Request"
+group #F5F3C1 "Sinatra Application"
+    r-[#red]>repo: "<b>get/albums"
+    repo-[#red]->ml: "<b>SQL query(select * albums;)"
+    ml-[#red]>repo: "<b>list of albums"
+    r <-[#red]- repo: "<b>Return albums"
+end
+
+r-[#red]->c: "<b>Http Response"
+
+@enduml
