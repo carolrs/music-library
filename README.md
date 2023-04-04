@@ -1,6 +1,6 @@
 # {{ GET/POST }} {{ /albums}} Route Design Recipe
 
-![Sequence diagram for Web](../docs/music_library.png-diagram.png?raw=true "sequence diagram for web")
+![Sequence diagram for Web](/docs/music_library.png-diagram.png?raw=true "sequence diagram for web")
 
 ## 1. Design the Route Signature
 ```
