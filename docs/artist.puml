@@ -1,0 +1,18 @@
+@startuml
+
+participant "Client" as c #B9E9FC
+participant "Rackup" as r #B9E9FC
+participant "ArtistRepository" as repo #B9E9FC
+participant "DataBase music_library" as ml #B9E9FC
+
+c-[#red]>r:"<b>Http Request(POST)"
+group #F5F3C1 "Sinatra Application"
+    r-[#red]>repo: "<b>create(artist)"
+    repo-[#red]>ml: "<b>insert into artists (name, genre) values($1, $2);"
+    ml-[#red]>repo: "<b>created"
+    repo -[#red]-> r: "<b>created"
+end
+
+r-[#red]->c: "<b>Http Response(status: 200 OK)"
+
+@enduml
