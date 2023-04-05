@@ -16,6 +16,15 @@ describe Application do
     end
   end
 
+    it "returns html index" do
+      response = get('/albums')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Surfer Rosa')
+      expect(response.body).to include('Released: 1988')
+      expect(response.body).to include('<a href="/albums/2">Surfer Rosa</a>')
+    end
+ 
+
   def reset_albums_table
     seed_sql = File.read('spec/seeds_albums.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
@@ -28,11 +37,9 @@ describe Application do
 
   context "POST /albums" do
     it "returns 200 OK with empty body" do
-      # Send a POST request to /submit
-      # with some body parameters
-      # and returns a response object we can test.
+     
       response = post("/albums", title: "Bla", release_year: "1980", artist_id: "1")
-      # Assert the response status code and body.
+      
       expect(response.status).to eq(200)
       expect(response.body).to eq("")
 
@@ -54,10 +61,10 @@ describe Application do
     it "returns 200 OK with the right content" do
       response = get('/artists')
 
-      result = "Pixies,ABBA,Taylor Swift,Nina Simone"
-    
       expect(response.status).to eq(200)
-      expect(response.body).to eq(result)
+      expect(response.body).to include('Artist: Pixies')
+      expect(response.body).to include('Genre: Rock')
+      expect(response.body).to include('<a href="/artists/1">Pixies</a>')
     end
 
     it"returns artist by id" do
@@ -65,7 +72,8 @@ describe Application do
       response= get('/artists/3')
   
       expect(response.status).to eq(200)
-      expect(response.body).to eq("Taylor Swift")
+      expect(response.body).to include('<h1>Taylor Swift</h1>')
+      expect(response.body).to include('<p>Pop</p>')
     end
 
   end
