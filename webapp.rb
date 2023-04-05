@@ -24,24 +24,20 @@ class Application < Sinatra::Base
 
     repo.create(album)
     return ''
-    # This route is not executed (the method doesn't match).
   end
 
   get '/albums' do
     repo = AlbumRepository.new
-    albums = repo.all
-
-    response = albums.map do|album|
-      album.title
-
-    end.join(',')
+    @albums = repo.all
+    return erb(:albums)
   end
-
+ 
   get '/albums/:id' do
     repo = AlbumRepository.new
-    album_id = params[:id]
-    album = repo.find(album_id)
-    album.title
+    artist_repo = ArtistRepository.new
+    @album = repo.find(params[:id])
+    @artist = artist_repo.find(@album.artist_id)
+    return erb(:index)
   end
 
   get '/artists' do
@@ -58,19 +54,17 @@ class Application < Sinatra::Base
     repo = ArtistRepository.new
     artist_id = params[:id]
     artist = repo.find(artist_id)
-    artist.name
+    @artist = artist.name
   end
 
   post '/artists' do
-       repo = ArtistRepository.new
+    repo = ArtistRepository.new
 
     artist = Artist.new
     artist.name = params[:name]
     artist.genre = params[:genre]
     
-
     repo.create(artist)
-
     return ''
   end
 

@@ -8,16 +8,11 @@ describe Application do
   let(:app) { Application.new }
 
   context 'GET /albums' do
-    it "returns 200 OK with the right content" do
-      # Send a GET request to /
-      # and returns a response object we can test.
+    it "returns html with a list of albums" do
       response = get('/albums')
-
-      result = "Doolittle,Surfer Rosa,Waterloo,Super Trouper,Bossanova,Lover,Folklore,I Put a Spell on You,Baltimore,Here Comes the Sun,Fodder on My Wings,Ring Ring"
-      
-      # Assert the response status code and body.
       expect(response.status).to eq(200)
-      expect(response.body).to eq(result)
+      expect(response.body).to include('Title: Surfer Rosa')
+      expect(response.body).to include('Released: 1988')
     end
   end
 
@@ -46,22 +41,13 @@ describe Application do
     end
   end
 
-  context "Get/albums(id)"do 
-    it"returns album by id" do
-
-      response= get('/albums/1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to eq("Doolittle")
-    end
-  end
-
   it"returns album by id" do
 
-    response= get('/albums/3')
+    response= get('/albums/1')
 
-    expect(response.status).to eq(200)
-    expect(response.body).to eq("Waterloo")
+    expect(response.body).to include("<h1>Doolittle</h1>")
+    expect(response.body).to include("Release year: 1989")
+    expect(response.body).to include("Artist: Pixies")
   end
 
   context 'GET /artists' do
@@ -81,7 +67,6 @@ describe Application do
       expect(response.status).to eq(200)
       expect(response.body).to eq("Taylor Swift")
     end
-
 
   end
 
