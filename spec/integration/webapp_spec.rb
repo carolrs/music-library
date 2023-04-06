@@ -75,7 +75,6 @@ describe Application do
       expect(response.body).to include('<h1>Taylor Swift</h1>')
       expect(response.body).to include('<p>Pop</p>')
     end
-
   end
 
   def reset_artists_table
@@ -97,6 +96,68 @@ describe Application do
 
       response = get("/artists")
       expect(response.body).to include("test1")
+    end
+  end
+
+  context "GET /album/new" do
+    it 'returns the form page' do
+      response = get('/album/new')
+  
+      expect(response.status).to eq(200)
+      expect(response.body).to include('"/albums" method="POST"')
+      expect(response.body).to include('name="title')
+      expect(response.body).to include('<input type="text" name="release_year">')
+  
+    end
+  end
+  
+  context "POST /albums" do
+    it "validate" do
+      response = post(
+        '/albums',
+        invalid_album: 'Welcome',
+        invalide_year: "1999",
+        invalid_artist_id: '1'
+      ) 
+      expect(response.status).to eq (400)
+    end
+
+    it 'returns a success page' do
+      response = post(
+        '/albums',
+        title: 'Welcome',
+        release_year: '1999',
+        artist_id: '1'
+      )
+  
+      expect(response.status).to eq(200)
+      # expect(response.body).to include('<p>Your post has been added!</p>')
+    end
+  end
+
+  context "GET /artist/new" do
+    it 'returns the form page for artist' do
+      response = get('/artist/new')
+  
+      expect(response.status).to eq(200)
+      expect(response.body).to include('"/artists" method="POST"')
+      expect(response.body).to include('name="name')
+      expect(response.body).to include('<input type="text" name="genre">')
+  
+    end
+  end
+
+  context "POST /artists" do
+
+    it 'returns a success page for artist' do
+      response = post(
+        '/artists',
+        name: 'Bob Dylan',
+        genre: 'Rock',
+      )
+  
+      expect(response.status).to eq(200)
+      # expect(response.body).to include('<p>Your post has been added!</p>')
     end
   end
 end

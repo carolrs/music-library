@@ -16,6 +16,11 @@ class Application < Sinatra::Base
   end
 
   post '/albums' do
+    if params[:title] == nil || params[:release_year] == nil || params[:artist_id] == nil
+      status 400
+      return ''
+    end
+
     repo = AlbumRepository.new
     title = params[:title]
     release_year = params[:release_year]
@@ -54,7 +59,7 @@ class Application < Sinatra::Base
   end
 
   post '/artists' do
-    repo = ArtistRepository.new
+     repo = ArtistRepository.new
 
     artist = Artist.new
     artist.name = params[:name]
@@ -64,7 +69,16 @@ class Application < Sinatra::Base
     return ''
   end
 
-  configure :development do
-    register Sinatra::Reloader
+  get '/album/new' do 
+    return erb(:new_album)
   end
+
+  get '/artist/new' do 
+    return erb(:new_artist)
+  end
+  
+  # configure :development do
+  #   register Sinatra::Reloader
+  # end
 end
+
