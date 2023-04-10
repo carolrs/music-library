@@ -1,7 +1,7 @@
 
-# Raw
+Raw
  
-# Blame
+Blame
  
  
 # frozen_string_literal: true
